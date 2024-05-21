@@ -3,10 +3,8 @@ import profileSVG from "./assets/img/avatar.jpg";
 
 function App() {
   return (
-    <div className="flex h-screen w-screen flex-col items-center justify-center">
-      <div className="text-indigo-dark tablet:px-2 flex h-5/6 w-11/12 flex-col items-center justify-between">
-        {/*  */}
-
+    <div className="tablet:justify-normal tablet:mt-16 flex h-screen w-screen flex-col items-center justify-center">
+      <div className="text-indigo-dark tablet:px-2 tablet:h-4/6 tablet:w-11/12 desktop:w-10/12 tablet:items-start flex h-5/6 w-11/12 flex-col items-center justify-between">
         {/* title */}
         <div className="flex h-[76px] w-full flex-col justify-around ">
           <p className="text-primary-dark text-xl font-semibold tracking-wide">
@@ -19,14 +17,12 @@ function App() {
         </div>
 
         {/* content */}
-        <div className="flex h-5/6 w-full flex-col justify-between">
-          {/*  */}
-
+        <div className="desktop:w-9/12 flex h-5/6 w-full flex-col justify-between">
           {/* form group */}
           <div className="flex h-5/6 flex-col justify-between">
             <div className="flex h-[104px] justify-between">
               <img className="h-full rounded-full" src={profileSVG} />
-              <div className="flex w-[223px] flex-col justify-around py-4">
+              <div className="tablet:mx-6 tablet:w-full flex w-[223px] flex-col justify-around py-4">
                 <button className="text-primary-medium h-9 w-32 rounded text-sm font-medium  tracking-wide shadow">
                   Change avatar
                 </button>
@@ -35,14 +31,14 @@ function App() {
                 </p>
               </div>
             </div>
-            <div className="flex h-16  w-full items-center justify-between">
-              <div className="flex w-[150px] flex-col">
+            <div className="flex h-16  w-full items-center justify-between gap-6">
+              <div className="tablet:w-[40%] flex w-[150px] flex-col">
                 <label className="text-primary-medium h-5  text-sm font-medium">
                   First Name
                 </label>
                 <input className="bg-input-field h-10 p-3" placeholder="John" />
               </div>
-              <div className="flex w-[150px] flex-col">
+              <div className="flex flex-grow flex-col">
                 <label className="text-primary-medium h-5  text-sm font-medium">
                   Last Name
                 </label>
