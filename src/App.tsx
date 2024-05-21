@@ -4,7 +4,7 @@ import profileSVG from "./assets/img/avatar.jpg";
 import Popup from "./components/Popup";
 
 function App() {
-  const [uploadFiles, setUploadFiles] = useState(true);
+  const [showPopup, setShowPopup] = useState(true);
 
   return (
     <>
@@ -29,7 +29,7 @@ function App() {
                 <img className="h-full rounded-full" src={profileSVG} />
                 <div className="tablet:mx-6 tablet:w-full flex w-[223px] flex-col justify-around py-4">
                   <button
-                    onClick={() => setUploadFiles(true)}
+                    onClick={() => setShowPopup(true)}
                     className="text-primary-medium h-9 w-32 rounded text-sm font-medium  tracking-wide shadow"
                   >
                     Change avatar
@@ -91,7 +91,7 @@ function App() {
           </div>
         </div>
       </div>
-      {uploadFiles && <Popup setUploadFiles={setUploadFiles} />}
+      {showPopup && <Popup setShowPopup={setShowPopup} />}
     </>
   );
 }
