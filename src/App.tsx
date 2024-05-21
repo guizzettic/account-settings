@@ -8,7 +8,7 @@ function App() {
 
   return (
     <>
-      <div className="tablet:justify-normal tablet:mt-16 flex h-screen w-screen flex-col items-center justify-center">
+      <div className="tablet:justify-normal tablet:mt-16 flex h-full w-full flex-col items-center justify-center overflow-hidden">
         <div className="text-indigo-dark tablet:px-2 tablet:h-4/6 tablet:w-11/12 desktop:w-10/12 desktop:items-start flex h-5/6 w-11/12 flex-col items-center justify-between">
           {/* title */}
           <div className="flex h-[76px] w-full flex-col justify-around ">
