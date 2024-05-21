@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import "./App.css";
 import profileSVG from "./assets/img/avatar.jpg";
 import Popup from "./components/Popup";
@@ -37,16 +37,16 @@ function App() {
   const validateForm = () => {
     const errors: FormDataErrors = {};
     if (formData.firstName.length < 3) {
-      errors.firstName = "Enter valid name.";
+      errors.firstName = "Enter valid first name.";
     }
     if (formData.lastName.length < 3) {
-      errors.lastName = "Enter valid name.";
+      errors.lastName = "Enter valid last name.";
     }
-    if (formData.email.length < 3) {
+    if (!/\S+@\S+\.\S+/.test(formData.email)) {
       errors.email = "Must be valid email.";
     }
     if (formData.userName.length < 3) {
-      errors.userName = "Must be unique.";
+      errors.userName = "Must be a unique username.";
     }
     return errors;
   };
@@ -54,7 +54,7 @@ function App() {
   const handleSave = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const validationErrors = validateForm();
-    if (Object.keys(validationErrors).length > 1) {
+    if (Object.keys(validationErrors).length > 0) {
       setFormDataErrors(validationErrors);
       return;
     }
@@ -65,13 +65,19 @@ function App() {
       email: "",
       userName: "",
     });
+
+    setShowPopup(true);
+  };
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   return (
     <>
       <div className="tablet:justify-normal tablet:mt-16 flex h-screen w-screen flex-col items-center justify-center overflow-hidden">
         <div className="text-indigo-dark tablet:px-2 tablet:h-4/6 tablet:w-11/12 desktop:w-10/12 desktop:items-start flex h-5/6 w-11/12 flex-col items-center justify-between">
-          {/* title */}
           <div className="flex h-[76px] w-full flex-col justify-around ">
             <p className="text-primary-dark text-xl font-semibold tracking-wide">
               Manage Your Account
@@ -82,9 +88,7 @@ function App() {
             </p>
           </div>
 
-          {/* content */}
           <div className="desktop:w-9/12 flex h-5/6 w-full flex-col justify-between">
-            {/* form group */}
             <div className="flex h-full flex-col justify-between">
               <div className="flex h-[104px] justify-between">
                 <img className="h-full rounded-full" src={profileSVG} />
@@ -108,12 +112,7 @@ function App() {
                   <input
                     value={formData.firstName}
                     name="firstName"
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        ["firstName"]: e.target.value,
-                      })
-                    }
+                    onChange={handleChange}
                     className="bg-input-field h-10 p-3"
                     placeholder="John"
                   />
@@ -128,9 +127,7 @@ function App() {
                   <input
                     value={formData.lastName}
                     name="lastName"
-                    onChange={(e) =>
-                      setFormData({ ...formData, ["lastName"]: e.target.value })
-                    }
+                    onChange={handleChange}
                     className="bg-input-field h-10 p-3"
                     placeholder="Appleseed"
                   />
@@ -146,9 +143,7 @@ function App() {
                 <input
                   value={formData.email}
                   name="email"
-                  onChange={(e) =>
-                    setFormData({ ...formData, ["email"]: e.target.value })
-                  }
+                  onChange={handleChange}
                   className="bg-input-field h-10 p-3"
                   placeholder="example@mail.com"
                 />
@@ -163,9 +158,7 @@ function App() {
                 <input
                   value={formData.userName}
                   name="userName"
-                  onChange={(e) =>
-                    setFormData({ ...formData, ["userName"]: e.target.value })
-                  }
+                  onChange={handleChange}
                   className="bg-input-field h-10 p-3"
                   placeholder="johnappleseed"
                 />
@@ -178,7 +171,6 @@ function App() {
               </div>
             </div>
 
-            {/* footer-controls */}
             <div className="flex h-20 items-center justify-end">
               <button
                 disabled={!validateForm()}
