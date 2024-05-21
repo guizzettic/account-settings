@@ -51,7 +51,7 @@ function App() {
     return errors;
   };
 
-  const handleSave = (e: { preventDefault: () => void }) => {
+  const handleSave = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const validationErrors = validateForm();
     if (Object.keys(validationErrors).length > 1) {
